@@ -19,7 +19,7 @@ KubeFed配置了两种类型的信息:
 - **Type configuration（类型配置）** 声明KubeFed应该处理哪些API类型
 - **Cluster configuration（集群配置）** 声明KubeFed应该针对哪些集群
 
-**Propagation（传播）**指的是将资源分配到联邦集群的机制。
+**Propagation（传播）** 指的是将资源分配到联邦集群的机制。
 
 类型配置有三个基本概念:
 
