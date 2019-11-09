@@ -6,85 +6,67 @@
 
 # Kubernetes集群联邦
 
-Kubernetes Cluster Federation (KubeFed for short) allows you to coordinate the
-configuration of multiple Kubernetes clusters from a single set of APIs in a
-hosting cluster. KubeFed aims to provide mechanisms for expressing which
-clusters should have their configuration managed and what that configuration
-should be. The mechanisms that KubeFed provides are intentionally low-level, and
-intended to be foundational for more complex multicluster use cases such as
-deploying multi-geo applications and disaster recovery.
+Kubernetes集群联合(简称KubeFed)允许您使用托管集群中的一组API，来协调多个Kubernetes集群的配置。KubeFed的目标是提供一种机制，用于表示哪些集群的配置应该被管理以及应该管理其中的哪些配置。KubeFed提供的机制是底层的，旨在为部署跨地区的应用和灾难恢复等复杂的多集群场景奠定基础。
 
-KubeFed is currently **alpha** and moving rapidly toward its initial
-[beta release](https://github.com/kubernetes-sigs/kubefed/milestone/4).
+KubeFed目前是**alpha版本**，并正在迅速向[beta版本](https://github.com/kubernetes-sigs/kubefed/milestone/4)演进。
 
-## Concepts
+## 概念
 
 <p align="center"><img src="docs/images/concepts.png" width="711"></p>
 
-KubeFed is configured with two types of information:
+KubeFed配置了两种类型的信息:
 
-- **Type configuration** declares which API types KubeFed should handle
-- **Cluster configuration** declares which clusters KubeFed should target
+- **Type configuration（类型配置）**声明KubeFed应该处理哪些API类型
+- **Cluster configuration（集群配置）**声明KubeFed应该针对哪些集群
 
-**Propagation** refers to the mechanism that distributes resources to federated
-clusters.
+**Propagation（传播）**指的是将资源分配到联邦集群的机制。
 
-Type configuration has three fundamental concepts:
+类型配置有三个基本概念:
 
-- **Templates** define the representation of a resource common across clusters
-- **Placement** defines which clusters the resource is intended to appear in
-- **Overrides** define per-cluster field-level variation to apply to the template
+- **Templates（模板）** 定义跨集群的公共资源的表示形式
+- **Placement（放置）** 定义资源将出现在哪些集群中
+- **Overrides（重写）** 定义每个集群字段级别的变体以应用于模板
 
-These three abstractions provide a concise representation of a resource intended
-to appear in multiple clusters. They encode the minimum information required for
-**propagation** and are well-suited to serve as the glue between any given
-propagation mechanism and higher-order behaviors like policy-based placement and
-dynamic scheduling.
+这三者抽象提供了计划出现在多个集群中资源的简单表示。它们编码了**传播**所需的最小信息，非常适合充当 任何给定传播机制 与 类似基于策略的放置和动态调度等高阶行为之间的粘合剂。
 
-These fundamental concepts provide building blocks that can be used by
-higher-level APIs:
+这些基本概念提供了可被高层API使用的积木:
 
-- **Status** collects the status of resources distributed by KubeFed across all federated clusters
-- **Policy** determines which subset of clusters a resource is allowed to be distributed to
-- **Scheduling** refers to a decision-making capability that can decide how 
-  workloads should be spread across different clusters similar to how a human
-  operator would
+- **Status（状态）**收集KubeFed跨所有联合集群分发资源的状态
+- **Policy（策略）**确定一个资源可以分配到集群的哪个子集
+- **Scheduling（调度）**指的是一种决策能力，它可以决定工作负载应该如何分布在不同的集群中，类似于人工操作的方式
 
-## Features
+## 特性
 
-| Feature | Maturity | Feature Gate | Default |
+| 特性 | 成熟度 | 特性门类 | 默认 |
 |---------|----------|--------------|---------|
-| [Push propagation of arbitrary types to remote clusters](https://github.com/kubernetes-sigs/kubefed/blob/master/docs/userguide.md#verify-your-deployment-is-working) | Alpha | PushReconciler | true |
-| [CLI utility (`kubefedctl`)](https://github.com/kubernetes-sigs/kubefed/blob/master/docs/userguide.md#kubefedctl-cli) | Alpha | | |
-| [Generate KubeFed APIs without writing code](https://github.com/kubernetes-sigs/kubefed/blob/master/docs/userguide.md#enabling-federation-of-an-api-type) | Alpha | | |
-| [Multicluster Service DNS via `external-dns`](https://github.com/kubernetes-sigs/kubefed/blob/master/docs/servicedns-with-externaldns.md) | Alpha | CrossClusterServiceDiscovery | true |
-| [Multicluster Ingress DNS via `external-dns`](https://github.com/kubernetes-sigs/kubefed/blob/master/docs/ingressdns-with-externaldns.md) | Alpha | FederatedIngress | true |
-| [Replica Scheduling Preferences](https://github.com/kubernetes-sigs/kubefed/blob/master/docs/userguide.md#replicaschedulingpreference) | Alpha | SchedulerPreferences | true |
+| [任意类型到远程集群的推送传播](https://github.com/kubernetes-sigs/kubefed/blob/master/docs/userguide.md#verify-your-deployment-is-working) | Alpha | PushReconciler | 是 |
+| [CLI 有效性 (`kubefedctl`)](https://github.com/kubernetes-sigs/kubefed/blob/master/docs/userguide.md#kubefedctl-cli) | Alpha | | |
+| [无需编写代码即可生成KubeFed API](https://github.com/kubernetes-sigs/kubefed/blob/master/docs/userguide.md#enabling-federation-of-an-api-type) | Alpha | | |
+| [通过 `external-dns` 实现多集群服务DNS](https://github.com/kubernetes-sigs/kubefed/blob/master/docs/servicedns-with-externaldns.md) | Alpha | CrossClusterServiceDiscovery | 是 |
+| [通过 `external-dns` 实现多集群入口DNS](https://github.com/kubernetes-sigs/kubefed/blob/master/docs/ingressdns-with-externaldns.md) | Alpha | FederatedIngress | 是 |
+| [复制调度偏好](https://github.com/kubernetes-sigs/kubefed/blob/master/docs/userguide.md#replicaschedulingpreference) | Alpha | SchedulerPreferences | 是 |
 
-## Guides
+## 指南
 
-### User Guide
+### 用户指南
 
-Take a look at our [user guide](docs/userguide.md) if you are interested in
-using KubeFed.
+如果你对于使用KubeFed感兴趣，请参阅我们的 [用户指南](docs/userguide.md)。
 
-### Development Guide
+### 开发指南
 
-Take a look at our [development guide](docs/development.md) if you are
-interested in contributing.
+如果你对于贡献KubeFed感兴趣，请参阅我们的 [开发指南](docs/development.md)。
 
-## Community
+## 社区
 
-Refer to the [contributing guidelines](./CONTRIBUTING.md) if you would like to contribute to KubeFed.
+如果你想贡献KubeFed，请参阅我们的 [贡献指南](./CONTRIBUTING.md) if you would like to contribute to KubeFed.
 
-### Communication channels
+### 沟通渠道
 
-KubeFed is sponsored by [SIG Multicluster](https://github.com/kubernetes/community/tree/master/sig-multicluster) and it uses the same communication channels as SIG multicluster.
+KubeFed是由[SIG Multicluster](https://github.com/kubernetes/community/tree/master/sig-multicluster)赞助的，它使用与SIG multicluster相同的通信通道。
 
-* Slack channel: [#sig-multicluster](http://slack.k8s.io/#sig-multicluster)
-* [Mailing list](https://groups.google.com/forum/#!forum/kubernetes-sig-multicluster)
+* Slack 频道: [#sig-multicluster](http://slack.k8s.io/#sig-multicluster)
+* [邮件列表](https://groups.google.com/forum/#!forum/kubernetes-sig-multicluster)
 
-## Code of Conduct
+## 行为准则
 
-Participation in the Kubernetes community is governed by the
-[Kubernetes Code of Conduct](./code-of-conduct.md).
+参与Kubernetes社区需要遵守 [Kubernetes行为准则](./code-of-conduct.md)的管理。
