@@ -6,7 +6,7 @@
 
 # Kubernetes集群联邦
 
-Kubernetes集群联合(简称KubeFed)允许您使用托管集群中的一组API，来协调多个Kubernetes集群的配置。KubeFed的目标是提供一种机制，用于表示哪些集群的配置应该被管理以及应该管理其中的哪些配置。KubeFed提供的机制是底层的，旨在为部署跨地区的应用和灾难恢复等复杂的多集群场景奠定基础。
+Kubernetes集群联邦(简称KubeFed)允许您使用托管集群中的一组API，来协调多个Kubernetes集群的配置。KubeFed的目标是提供一种机制，用于表示哪些集群的配置应该被管理以及应该管理其中的哪些配置。KubeFed提供的机制是底层的，旨在为部署跨地区的应用和灾难恢复等复杂的多集群场景奠定基础。
 
 KubeFed目前是**alpha版本**，并正在迅速向[beta版本](https://github.com/kubernetes-sigs/kubefed/milestone/4)演进。
 
