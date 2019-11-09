@@ -62,7 +62,7 @@ KubeFed配置了两种类型的信息:
 
 ### 沟通渠道
 
-KubeFed是由[SIG Multicluster](https://github.com/kubernetes/community/tree/master/sig-multicluster)赞助的，它使用与SIG multicluster相同的通信通道。
+KubeFed是由[SIG Multicluster](https://github.com/kubernetes/community/tree/master/sig-multicluster)赞助的，它使用与SIG multicluster相同的沟通渠道。
 
 * Slack 频道: [#sig-multicluster](http://slack.k8s.io/#sig-multicluster)
 * [邮件列表](https://groups.google.com/forum/#!forum/kubernetes-sig-multicluster)
