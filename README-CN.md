@@ -31,9 +31,9 @@ KubeFed配置了两种类型的信息:
 
 这些基本概念提供了可被高层API使用的积木:
 
-- **Status（状态）**收集KubeFed跨所有联合集群分发资源的状态
-- **Policy（策略）**确定一个资源可以分配到集群的哪个子集
-- **Scheduling（调度）**指的是一种决策能力，它可以决定工作负载应该如何分布在不同的集群中，类似于人工操作的方式
+- **Status（状态）** 收集KubeFed跨所有联合集群分发资源的状态
+- **Policy（策略）** 确定一个资源可以分配到集群的哪个子集
+- **Scheduling（调度）** 指的是一种决策能力，它可以决定工作负载应该如何分布在不同的集群中，类似于人工操作的方式
 
 ## 特性
 
@@ -58,7 +58,7 @@ KubeFed配置了两种类型的信息:
 
 ## 社区
 
-如果你想贡献KubeFed，请参阅我们的 [贡献指南](./CONTRIBUTING.md) if you would like to contribute to KubeFed.
+如果你想贡献KubeFed，请参阅我们的 [贡献指南](./CONTRIBUTING.md)。
 
 ### 沟通渠道
 
